@@ -12,9 +12,11 @@ function App() {
   const mustShow = !loading && !data.length;
 
   function handleChange(e) {
-    if (e.target.value.length > MIN_SEARCH_LIMIT) {
-      inputDebounce(e.target.value, (value) => dispatch(getBySubject(value)));
+    if (e.target.value.length < MIN_SEARCH_LIMIT) {
+      inputDebounce(null);
+      return;
     }
+    inputDebounce(e.target.value, (value) => dispatch(getBySubject(value)));
   }
 
   return (
